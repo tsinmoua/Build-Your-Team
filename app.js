@@ -10,6 +10,9 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+const team = [];
+
+
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
@@ -20,28 +23,61 @@ function managerInfo() {
             {
                 type: "input",
                 name: "name",
-                message: "What is the manager's name?"
+                message: "What is the manager's name?",
+                validate: input => {
+                    // console.log(input.match(/\d/g));
+                    if (input !== "" && input.match(/\d/g) === null) {
+                        return true;
+                    }
+                    return "Please enter a valid name."
+                }
             },
             {
-                type: "number",
+                type: "input",
                 name: "id",
-                message: "What is the manager's ID?"
+                message: "What is the manager's ID?",
+                validate: input => {
+                    // console.log(input.match(/^\d+$/));
+                    if (input !== "" && input.match(/^\d+$/) !== null) {
+                        return true;
+                    }
+                    return "Please enter a valid ID number."
+                }
             },
             {
                 type: "input",
                 name: "email",
-                message: "What is the manager's email address?"
+                message: "What is the manager's email address?",
+                validate: input => {
+                    // console.log(input.match(/^\S+@\S+\.\S+$/));
+                    if (input !== "" && input.match(/^\S+@\S+\.\S+$/) !== null) {
+                        return true;
+                    }
+                    return "Please enter a valid email address."
+                }
             },
             {
-                type: "number",
+                type: "input",
                 name: "officeNumber",
-                message: "What is the manager's office number?"
-            },
+                message: "What is the manager's office number?",
+                validate: input => {
+                    // console.log(input.match(/^\d+$/));
+                    if (input !== "" && input.match(/^\d+$/) !== null) {
+                        return true;
+                    }
+                    return "Please enter a valid office number."
+                },
+            }
         ])
         .then(function (data) {
+            const manager = new Manager (data.name, data.id, data.email, data.officeNumber);
+            team.push(manager);
+            teamBuilder();
         });
 
 }
+
+
 
 managerInfo();
 
