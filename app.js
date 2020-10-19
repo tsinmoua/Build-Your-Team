@@ -10,6 +10,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+
 const team = [];
 const idIndex = [];
 
@@ -94,11 +95,12 @@ function teamBuilder() {
         ])
         .then(function (data) {
             if (data.employee === "Engineer") {
-                engineerInfo()
+                engineerInfo();
             } else if (data.employee === "Intern") {
-                internInfo()
+                internInfo();
             } else {
-                return
+                createFile();
+                console.log(team);
             }
         });
 
@@ -228,9 +230,15 @@ function internInfo() {
         });
 }
 
-
+function createFile() {
+    if (!fs.existsSync(OUTPUT_DIR)) {
+        fs.mkdirSync(OUTPUT_DIR);
+    }
+    fs.writeFileSync(outputPath, render(team), "utf-8")
+}
 
 managerInfo();
+
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
