@@ -99,7 +99,10 @@ function teamBuilder() {
             } else if (data.employee === "Intern") {
                 internInfo();
             } else {
-                createFile();
+                if (!fs.existsSync(OUTPUT_DIR)) {
+                    fs.mkdirSync(OUTPUT_DIR);
+                }
+                fs.writeFileSync(outputPath, render(team), "utf-8")
                 console.log(team);
             }
         });
@@ -152,7 +155,8 @@ function engineerInfo() {
                 name: "github",
                 message: "What is the engineer's GitHub username?",
                 validate: input => {
-                    // console.log(input.match(/^\d+$/));
+                    console.log(input);
+                    console.log(typeof(input));
                     if (input !== "") {
                         return true;
                     }
@@ -161,7 +165,7 @@ function engineerInfo() {
             }
         ])
         .then(function (data) {
-            const engineer = new Engineer(data.name, data.id, data.email, data.officeNumber);
+            const engineer = new Engineer(data.name, data.id, data.email, data.github);
             team.push(engineer);
             idIndex.push(data.id)
             teamBuilder();
@@ -214,7 +218,6 @@ function internInfo() {
                 name: "school",
                 message: "What school is the intern attending?",
                 validate: input => {
-                    // console.log(input.match(/^\d+$/));
                     if (input !== "") {
                         return true;
                     }
@@ -223,22 +226,15 @@ function internInfo() {
             }
         ])
         .then(function (data) {
-            const intern = new Intern(data.name, data.id, data.email, data.officeNumber);
+            const intern = new Intern(data.name, data.id, data.email, data.school);
             team.push(intern);
             idIndex.push(data.id)
             teamBuilder();
         });
 }
 
-function createFile() {
-    if (!fs.existsSync(OUTPUT_DIR)) {
-        fs.mkdirSync(OUTPUT_DIR);
-    }
-    fs.writeFileSync(outputPath, render(team), "utf-8")
-}
 
 managerInfo();
-
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
