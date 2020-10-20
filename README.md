@@ -35,6 +35,10 @@ To start, run the following in your command line:
 ```
 node app.js
 ```
+
+If you need more instructions on how to run this application, click [here](https://drive.google.com/file/d/1eTLv1tMj-E-Ic6eliH3CPWuRjX-6PGjt/view) for a short video tutorial
+
+![image](./assets/images/html.jpg)
 <!-- Provide instructions and examples for use. Include screenshots as needed.  -->
 
 ## Contributions
