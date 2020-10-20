@@ -1,0 +1,30 @@
+.jumbotron {
+    background-image: url(
+        "https://www.amcmtg.com/wp-content/uploads/2016/05/corporate-team-bckgrnd-1400x600.jpg"
+    );
+    background-size: 100vh;
+    background-position-x: center;
+    color: white;
+}
+
+h1 {
+    font-size: 5rem;
+}
+
+body {
+    background-image: linear-gradient(white, rgb(138, 13, 50));
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+.card-header {
+    background-color: rgb(138, 13, 50);
+    color: white;
+}
+
+.card {
+    margin: 5px;
+}
